@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Статьи
+        </title>
+    </head>
+    <body>
+        <h2>{{ article.title }}</h2>
+        {{ article.content }}<br>
+        <p>Количество просмотров: {{ article.show_count }}</p>
+        {% if comments %}
+            {% for comment in comments %}
+                {{ comment.content }}<br>
+                <p>создано {{ comment.created_date }}</p> 
+                {% if comment.created_date != comment.modificated_date %}
+                    <p>изменено {{ comment.modificated_date }}</p>    
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form_comment.as_p }}
+            <input type="submit" value="Добавить комментарий">
+        </form>
+    </body>
+</html>

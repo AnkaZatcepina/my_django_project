@@ -1,0 +1,12 @@
+{% extends 'lesson_02_hw_app/base.html' %}
+{% block title %}
+    Продукт
+{% endblock %}
+{% block content %}   
+    <div style="width: 40%"><img src="/static/{{ product.image }}" alt="Нет картинки {{ product.name }}"></div>      
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Изменить">
+    </form>
+{% endblock %}

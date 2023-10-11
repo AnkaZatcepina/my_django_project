@@ -1,0 +1,15 @@
+{% extends 'lesson_02_hw_app/base.html' %}
+{% block title %}
+    Заказанные товары
+{% endblock %}
+{% block content %}
+    <h1>Заказанные товары {{ client.name }}:</h1>
+    {% for order in orders %}
+        <h3>Заказ {{ order.pk }} от {{ order.order_date }}:</h3>
+        <ul>
+        {% for product in order.products.all %}
+            <li>{{ product.name }} {{ product.description }}</li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+{% endblock %}
