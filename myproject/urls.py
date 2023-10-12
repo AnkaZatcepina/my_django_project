@@ -25,7 +25,7 @@ urlpatterns = [
     path('homework1/', include('lesson_01_homework_app.urls')),
     path('lesson2/', include('lesson_02_app.urls')),
     path('lesson2/', include('lesson_02_hw_app.urls')),
-    path('__debug__/', include("debug_toolbar.urls")),
+    #path('__debug__/', include("debug_toolbar.urls")),
 ]
 
 #if settings.DEBUG :

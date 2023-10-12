@@ -9,8 +9,12 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+
+# SECURITY WARNING: keep the secret key used in production secret!
+#SECRET_KEY = "django-insecure-4mbzb_b&hcbte#sdpec6(!foku!-r8^ftljgy=&5pwi07j1#di"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,15 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-4mbzb_b&hcbte#sdpec6(!foku!-r8^ftljgy=&5pwi07j1#di"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'csa.zatsepin.dev',
+    'username.pythonanywhere.com',
 ]
 
 
@@ -88,8 +94,15 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "anka$default",
+        "USER": "anka",
+        "PASSWORD": os.getenv('MYSQL_PASSWORD'),
+        "HOST": "anka.mysql.pythonanywhere-services.com",
+        "OPTIONS": {
+            "init_command": "SET NAMES 'utf8mb4';SET sql_model='STRICT_TRANS_TABLES'",
+            "charset": "utf8mb4",
+        },
     }
 }
 
